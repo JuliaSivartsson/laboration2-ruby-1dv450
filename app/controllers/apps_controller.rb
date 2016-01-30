@@ -3,13 +3,13 @@ class AppsController < ApplicationController
       
     def new
         #Application form
-        @application = Application.new
+        @application = App.new
     end
     
     def create
         #Create a new application
         random = rand(2000...5000)
-        @application = Application.new(apps_params)
+        @application = App.new(apps_params)
         if @application.save
             @application.update_attribute(:apikey, random)
           flash[:notice] = "Yay, your registration was successful"
@@ -23,7 +23,7 @@ class AppsController < ApplicationController
     
     def delete_application
         #Delete application WHY DO I GET ERROR?
-      @app_to_delete = Application.find(params[:id])
+      @app_to_delete = App.find(params[:id])
       @app_to_delete.destroy
       render "profile"
     end

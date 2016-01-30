@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     end
     
     def profile
-        @applications = Application.all
+        @applications = App.all
     end
     
     def logout
