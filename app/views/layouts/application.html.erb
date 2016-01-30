@@ -2,11 +2,30 @@
 <html>
 <head>
   <title>Workspace</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <%unless session[:user_id]%>
+			<ul class="nav navbar-nav">
+				<li><%= link_to :Signup , :signup, class: "nav_links"%></li>
+				<li><%= link_to :Login , :login, class: "nav_links"%></li>	
+			</ul>		
+			<%else%>
+			<ul class="nav navbar-nav">
+				<li><p class="navbar_name">Logged in as <%= @current_user.name %></p></li>
+				<li><%= link_to :Home , :home%> </li>
+				<li><%= link_to :Profile , :profile%> </li>
+				<li><%= link_to :Logout , :logout%></li>	
+			</ul>
+			<% end %>
+    </div>
+  </nav>
 
 <%= yield %>
 
