@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="text-center">Sign up</h1>
+
+  <div class="form-content">
+    <div class="errors">
+      <% if @user.errors.any? %>
+        <ul class="alert alert-danger">
+          <% for message_error in @user.errors.full_messages %>
+            <li><%= message_error %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="form">
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+          <p> Username:</br> <%= f.text_field :name%> </p>
+          <p> Password:</br> <%= f.password_field :password%></p>
+          <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
+          <%= submit_tag("Signup", class: "btn btn-primary") %>
+      <% end %>
+    </div>
+  </div>
+</div>
