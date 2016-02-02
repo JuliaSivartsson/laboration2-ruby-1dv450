@@ -71,3 +71,10 @@
 .margin-top{
 	margin-top: 20px;
 }
+
+.application-display{
+	padding: 10px;
+	border: 1px solid #eee;
+	background: #eee;
+	margin-bottom: 20px;
+}

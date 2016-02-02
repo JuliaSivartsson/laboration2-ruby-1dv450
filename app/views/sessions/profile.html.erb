@@ -8,11 +8,21 @@
       <div class="col-md-7">
         <h3>All applications</h3>
         <% if @applications.any? %>
-          <ul>
-            <% @applications.each do | application | %>
-              <li><%= application.name %>, <%= application.description %>, <%= application.apikey %> <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %></li>
-            <% end %>
-          </ul>
+          <% @applications.each do | application | %>
+            <div class="col-md-9 application-display">
+              <h2><%= application.name %></h2>
+              <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %>
+              <p>
+              <p>
+                <b>Application belongs to:</b> <%= User.find(application.user_id).name %>
+              </p>
+                <b>Description:</b> <%= application.description %>
+              </p>
+              <p>
+                <b>apiKey:</b> <%= application.apikey %>
+              </p>
+            </div>
+          <% end %>
         <% else %>
           <p>You have no registered applications yet</p>
         <% end %>
@@ -21,11 +31,18 @@
       <div class="col-md-7">
         <h3>Your applications</h3>
         <% if @current_user.app.any? %>
-          <ul>
             <% @current_user.app.each do | application | %>
-              <li><%= application.name %>, <%= application.description %>, <%= application.apikey %> <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %></li>
+              <div class="col-md-9 application-display">
+                <h2><%= application.name %></h2>
+                <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %>
+                <p>
+                  <b>Description:</b> <%= application.description %>
+                </p>
+                <p>
+                  <b>apiKey:</b> <%= application.apikey %>
+                </p>
+              </div>
             <% end %>
-          </ul>
         <% else %>
           <p>You have no registered applications yet</p>
         <% end %>
