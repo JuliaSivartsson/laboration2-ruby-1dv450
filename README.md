@@ -21,4 +21,5 @@ Om applikationen körs på egen maskin, finns det tre viktiga steg för att få 
 * **rake db:seed**
 
 Körs ingen seed kommer felmeddelande att visas då användaren admin måste finnas i systemet samt ha id 1.
+
 Vid problem, kontakta mig på: jsigc09@student.lnu.se
