@@ -9,7 +9,7 @@ Det slutade med att jag gjorde om hela min laboration, och fick på så sätt g�
 Vad jag gjort efter att jag flyttade över koden var att ändra databas från mysql till postsql då Heroku inte verkade godkänna något annat (jag fick det inte att fungera i alla fall).
 Så jag kommer här nedan att länka till Heroku url-en samt Cloud9, ifall något skulle gå fel med Heroku.
 
-Heroku: [laboration1-Heroku](https://evening-wildwood-30690.herokuapp.com)
+Heroku: [laboration1-Heroku](https://arcane-harbor-88997.herokuapp.com/)
 
 Cloud9: [laboration1-Cloud9](https://testforheroku-juliasivartsson.c9users.io/)
 
