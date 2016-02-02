@@ -15,7 +15,7 @@ Cloud9: [laboration1-Cloud9](https://testforheroku-juliasivartsson.c9users.io/)
 
 ##Viktigt
 
-Om applikationen körs på egen maskin, finns det två viktiga steg för att få den att fungera.
+Om applikationen körs på egen maskin, finns det tre viktiga steg för att få den att fungera.
 * Kör **bundle install**
 * **rake db:migrate**
 * **rake db:seed**
