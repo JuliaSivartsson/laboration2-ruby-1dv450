@@ -21,5 +21,9 @@ Om applikationen körs på egen maskin, finns det tre viktiga steg för att få 
 * **rake db:seed**
 
 Körs ingen seed kommer felmeddelande att visas då användaren admin måste finnas i systemet samt ha id 1.
+Admin är den person som har fullständiga rättigheter i applikationen och kan se alla användares registrerade appar samt radera dem.
+För att komma åt admin kontot finns följande inloggningsuppgifter:
+**Användarnamn:** admin
+**Lösenord:** hejsan
 
 Vid problem, kontakta mig på: jsigc09@student.lnu.se
