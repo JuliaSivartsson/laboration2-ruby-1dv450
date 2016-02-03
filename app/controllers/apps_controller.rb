@@ -19,14 +19,7 @@ class AppsController < ApplicationController
           flash[:notice] = "Darn, something went wrong!"
           flash[:color] = "invalid"
         end
-        render "new"
-    end
-    
-    def delete_application
-        #Delete application WHY DO I GET ERROR?
-      @app_to_delete = App.find(params[:id])
-      @app_to_delete.destroy
-      render "profile"
+        redirect_to "/profile"
     end
     
     def apps_params

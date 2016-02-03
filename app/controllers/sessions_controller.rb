@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
           session[:user_id] = user.id
           flash[:notice] = "Yay, you are now logged in!"
           flash[:color] = "valid"
-          redirect_to(:ation => 'home')
+          redirect_to(:action => 'home')
         else
         
           flash.now[:notice] = "You didn't login, something went wrong!"
@@ -28,7 +28,20 @@ class SessionsController < ApplicationController
     end
     
     def profile
-        @applications = App.all
+        @applications = App.order('id DESC').all
+    end
+    
+    def delete_application
+        #Delete application
+        @app_to_delete = App.find_by_id(params[:id])
+        if @app_to_delete.destroy
+            flash[:notice] = "Application is now deleted!"
+            flash[:color] = "valid"
+        else
+          flash[:notice] = "Something went wrong, could not delete the application"
+          flash[:color] = "invalid"
+        end
+        redirect_to :action => "profile"
     end
     
     def logout
