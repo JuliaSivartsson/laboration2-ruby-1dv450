@@ -1,0 +1,25 @@
+<% title "Create new app" %>
+
+<div class="container">
+  <h1 class="text-center">Register application</h1>
+
+  <div class="form-content">
+    <div class="errors">
+      <% if @application.errors.any? %>
+        <ul class="alert alert-danger">
+          <% for message_error in @application.errors.full_messages %>
+            <li><%= message_error %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="form">
+      <%= form_for(:application, :url => {:controller => 'apps', :action => 'create'}) do |f| %>
+          <p> Application name:</br> <%= f.text_field :name%> </p>
+          <p> Description:</br> <%= f.text_field :description%></p>
+          <p><%= f.hidden_field :user_id, :value => @current_user.id %></p>
+          <%= submit_tag("Register", class: "btn btn-primary") %>
+      <% end %>
+    </div>
+  </div>
+</div>

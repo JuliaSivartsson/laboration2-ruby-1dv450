@@ -1,0 +1,59 @@
+<% title "Profile" %>
+
+<div class="container">
+  <h1 class="text-center">Here is your profile <%=current_user.name%></h1>
+    <% if current_user.name == "admin" %>
+      <p class="text-center">
+          Here you can see all users applications
+      </p>
+    
+      <div class="col-md-7">
+        <h3>All applications</h3>
+        <% if @applications.any? %>
+          <% @applications.each do | application | %>
+            <div class="col-md-9 application-display">
+              <h2><%= application.name %></h2>
+              <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %>
+              <p>
+              <p>
+                <b>Application belongs to:</b> <%= User.find(application.user_id).name %>
+              </p>
+                <b>Description:</b> <%= application.description %>
+              </p>
+              <p>
+                <b>apiKey:</b> <%= application.apikey %>
+              </p>
+            </div>
+          <% end %>
+        <% else %>
+          <p>You have no registered applications yet</p>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center">
+          Here you can apply for API-keys
+      </p>
+      <div class="col-md-7">
+        <h3>Your applications</h3>
+        <% if current_user.app.any? %>
+            <% current_user.app.order('id DESC').each do | application | %>
+              <div class="col-md-9 application-display">
+                <h2><%= application.name %></h2>
+                <%= link_to "Delete", :controller => :apps, :action => :delete_application, :id => application.id %>
+                <p>
+                  <b>Description:</b> <%= application.description %>
+                </p>
+                <p>
+                  <b>apiKey:</b> <%= application.apikey %>
+                </p>
+              </div>
+            <% end %>
+        <% else %>
+          <p>You have no registered applications yet</p>
+        <% end %>
+      </div>
+      <div class="col-md-4 margin-top">
+        <%= link_to :Register , :apps, class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
