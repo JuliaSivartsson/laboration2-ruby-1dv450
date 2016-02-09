@@ -8,11 +8,12 @@ class AppsController < ApplicationController
     
     def create
         #Create a new application
-        apiKey = generate_api_key
-        
         @application = App.new(apps_params)
+        
+        # Got really good input on the peer review that helped me with this
+        @application.apikey = [*('a'..'z'),*('0'..'9')].shuffle[0,50].join
+        
         if @application.save
-            @application.update_attribute(:apikey, apiKey)
           flash[:notice] = "Yay, your registration was successful"
           flash[:color] = "valid"
         else
@@ -40,11 +41,4 @@ class AppsController < ApplicationController
         redirect_to "/profile"
     end
     
-    #Found help on how to generate apiKey here: http://blog.joshsoftware.com/2014/05/08/implementing-rails-apis-like-a-professional/
-    def generate_api_key
-      loop do
-        token = SecureRandom.base64.tr('+/=', 'Qrt')
-        break token
-      end
-    end
 end
