@@ -10,8 +10,8 @@ class AppsController < ApplicationController
         #Create a new application
         @application = App.new(apps_params)
         
-        # Got really good input on the peer review that helped me with this
-        @application.apikey = [*('a'..'z'),*('0'..'9')].shuffle[0,50].join
+        # Make sure apikey's are unique and random: http://ruby-doc.org/stdlib-1.9.2/libdoc/securerandom/rdoc/SecureRandom.html
+        @application.apikey = SecureRandom.hex
         
         if @application.save
           flash[:notice] = "Yay, your registration was successful"
