@@ -21,12 +21,14 @@ Rails.application.routes.draw do
   
   #Add /api/ before URI
 namespace :api, :defaults => { :format => :json} do
-    get "/restaurants" => "restaurants#index"
-    post "/restaurants" => "restaurants#create"
-    
-    get "/restaurants/:id" => "restaurants#show"
-    put "/restaurants/:id" => "restaurants#update"
-    delete "/restaurants/:id" =>"restaurants#destroy"
+    namespace :v1 do
+        get "/restaurants" => "restaurants#index"
+        post "/restaurants" => "restaurants#create"
+        
+        get "/restaurants/:id" => "restaurants#show"
+        put "/restaurants/:id" => "restaurants#update"
+        delete "/restaurants/:id" =>"restaurants#destroy"
+    end
 end
   
   # The priority is based upon order of creation: first created -> highest priority.

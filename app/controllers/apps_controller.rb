@@ -11,7 +11,6 @@ class AppsController < ApplicationController
         @application = App.new(apps_params)
         
         # Make sure apikey's are unique and random: http://ruby-doc.org/stdlib-1.9.2/libdoc/securerandom/rdoc/SecureRandom.html
-        @application.apikey = SecureRandom.hex
         
         if @application.save
           flash[:notice] = "Yay, your registration was successful"

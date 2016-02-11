@@ -22,14 +22,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def check_api_key
-     api_key = request.headers['X-ApiKey']
-     # Check that apikey exists
-     if App.find_by_apikey(api_key)
-      return true
-     end
-  end
-  
   protected
   
   def set_cache_buster
