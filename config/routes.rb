@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  #THIS IS FOR LABORATION1
     root 'sessions#login'
   
   get "apps" => "apps#new"
@@ -14,6 +15,19 @@ Rails.application.routes.draw do
   
   get ':controller(/:action(/:id))(.:format)'
   post ':controller(/:action(/:id))(.:format)'
+  
+  
+  #THIS IS FOR LABORATION2
+  
+  #Add /api/ before URI
+namespace :api, :defaults => { :format => :json} do
+    get "/restaurants" => "restaurants#index"
+    post "/restaurants" => "restaurants#create"
+    
+    get "/restaurants/:id" => "restaurants#show"
+    put "/restaurants/:id" => "restaurants#update"
+    delete "/restaurants/:id" =>"restaurants#destroy"
+end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
