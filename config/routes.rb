@@ -28,6 +28,9 @@ namespace :api, :defaults => { :format => :json} do
         get "/restaurants/:id" => "restaurants#show"
         put "/restaurants/:id" => "restaurants#update"
         delete "/restaurants/:id" =>"restaurants#destroy"
+        
+        resources :positions
+        resources :tags
     end
 end
   

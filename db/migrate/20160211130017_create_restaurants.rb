@@ -4,8 +4,7 @@ class CreateRestaurants < ActiveRecord::Migration
 
       t.string :name
       t.string :description
-      t.string :longitude
-      t.string :latitude
+      t.belongs_to :position, index: true
       t.timestamps null: false
     end
   end
