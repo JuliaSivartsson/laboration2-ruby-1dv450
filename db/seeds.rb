@@ -10,8 +10,16 @@ User.create([{name: "admin", password: "hejsan", password_confirmation: "hejsan"
 
 App.create(name: "itzy's app", description: "min app", user_id: 2)
 
-Restaurant.create([{name: "Itzy's place", description: "Jävligt snygg restaurang", position_id: 1}, 
-                {name: "Mammas mat!", description: "Världens bästa!", position_id: 1},
-                {name: "Anubis bistro", description: "Katten med klös", position_id: 1}])
+Restaurant.create([{name: "Itzy's place", message: "Jävligt snygg restaurang", rating: 4, position_id: 1}, 
+                {name: "Mammas mat!", message: "Världens bästa!", rating: 5, position_id: 1},
+                {name: "Anubis bistro", message: "Katten med klös", rating: 5, position_id: 1}])
                 
 Position.create([{address: "Statue of Liberty, NY"}, {address: "Värendsgatan 12, Lammhult"}])
+
+tag = Tag.create(name: "#vegan")
+restaurant = Restaurant.create(name: "Bananpaj", message: "Massa bananer", rating: 4, position_id: 2)
+
+
+
+restaurant.tag_ids = [tag.id]
+restaurant.save

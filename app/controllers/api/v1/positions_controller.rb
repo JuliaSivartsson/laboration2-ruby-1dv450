@@ -10,58 +10,53 @@ module Api
             #Return response in json or xml
             respond_to :json, :xml
             
-            # GET /api/restaurants
+            # GET all positions /api/v1/positions
             def index
-                restaurants = Position.all
-                nr = Position.distinct.count(:id)
-                respond_with restaurants, status: :ok
+                #Limit and offset is set in application_controller
+                positions = Position.limit(@limit).offset(@offset)
+                
+                count_positions = Positon.distinct.count(:id)
+                @response = {positions: positions, nrOfPositions: count_positions}
+                respond_with @response, status: :ok
             end
             
-            # POST /api/restaurants
-            def create
-                restaurant = Position.new(params[:restaurant])
+            # GET one positions /api/v1/positions/:id
+            def show
+                position = Position.find_by_id(params[:id])
                 
-                if restaurant.save
-                    respond_with restaurant, status: :created
+                if !position.nil?
+                    respond_with position, status: :ok
                 else
-                    respond_with restaurant.errors, status: :unprocessable_entity
+                    respond_with position.errors, status: :not_found
                 end
             end
             
-            # GET /api/restaurants/:id
-            def show
-                restaurant = Position.find(params[:id])
-                respond_with restaurant
+            # POST create positions /api/v1/positions
+            def create
+                position = Position.new(params[:restaurant])
+                
+                if restaurant.save
+                    respond_with position, status: :created
+                else
+                    respond_with position.errors, status: :unprocessable_entity
+                end
             end
             
-            # DELETE /api/restaurants/:id
+            # DELETE /api/v1/positions/:id
             def destroy
-                restaurant.destroy
+                position.destroy
                 
                 head :no_content
             end
             
-            # PUT /api/restaurants/:id
+            # PUT /api/v1/positions/:id
             def update
-                if restaurant.update(contact_params)
+                if position.update(contact_params)
                     head :no_content
                 else
-                    respond_with restaurant.errors, status: :unprocessable_entity
+                    respond_with position.errors, status: :unprocessable_entity
                 end
             end
-            
-            private
-            
-            def restrict_access
-                api_key = App.find_by_apikey(params[:access_token])
-                head :unauthorized unless api_key
-            end
-            
-            #def restrict_access
-                #authenticate_or_request_with_http_token do |token, options|
-                    #App.exists?(apikey: token)
-                #end
-            #end
         end
     end
 end

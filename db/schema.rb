@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212074902) do
+ActiveRecord::Schema.define(version: 20160216083831) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +34,8 @@ ActiveRecord::Schema.define(version: 20160212074902) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.string   "message"
+    t.integer  "rating"
     t.integer  "position_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -42,15 +43,19 @@ ActiveRecord::Schema.define(version: 20160212074902) do
 
   add_index "restaurants", ["position_id"], name: "index_restaurants_on_position_id"
 
-  create_table "tags", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "restaurant_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  create_table "restaurants_tags", id: false, force: :cascade do |t|
+    t.integer "restaurant_id", null: false
+    t.integer "tag_id",        null: false
   end
 
-  add_index "tags", ["restaurant_id"], name: "index_tags_on_restaurant_id"
+  add_index "restaurants_tags", ["restaurant_id", "tag_id"], name: "index_restaurants_tags_on_restaurant_id_and_tag_id"
+  add_index "restaurants_tags", ["tag_id", "restaurant_id"], name: "index_restaurants_tags_on_tag_id_and_restaurant_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
