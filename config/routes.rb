@@ -30,6 +30,7 @@ namespace :api, :defaults => { :format => :json} do
         delete "/restaurants/:id" =>"restaurants#destroy"
         
         resources :positions
+        get "/positions/nearby/:long/:lat" => "positions#nearby"
         resources :tags
     end
 end

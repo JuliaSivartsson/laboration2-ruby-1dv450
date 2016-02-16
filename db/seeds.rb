@@ -17,9 +17,13 @@ Restaurant.create([{name: "Itzy's place", message: "Jävligt snygg restaurang", 
 Position.create([{address: "Statue of Liberty, NY"}, {address: "Värendsgatan 12, Lammhult"}])
 
 tag = Tag.create(name: "#vegan")
-restaurant = Restaurant.create(name: "Bananpaj", message: "Massa bananer", rating: 4, position_id: 2)
+restaurant1 = Restaurant.create(name: "Bananpaj", message: "Massa bananer", rating: 4, position_id: 2)
+restaurant2 = Restaurant.create(name: "Café Kantarell", message: "Bara massa gött", rating: 5, position_id: 2)
 
 
 
-restaurant.tag_ids = [tag.id]
-restaurant.save
+restaurant1.tag_ids = [tag.id]
+restaurant1.save
+
+restaurant2.tag_ids = [tag.id]
+restaurant2.save
