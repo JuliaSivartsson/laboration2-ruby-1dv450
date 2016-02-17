@@ -37,4 +37,8 @@ class SessionsController < ApplicationController
         flash[:color] = "valid"
         redirect_to :action => 'login'
     end
+    
+    def create
+        raise request.env["omniauth.auth"].to_yaml
+    end
 end

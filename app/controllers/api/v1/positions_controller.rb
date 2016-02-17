@@ -28,32 +28,38 @@ module Api
                 if !position.nil?
                     respond_with position, include: [:restaurants], status: :ok
                 else
-                    respond_with position.errors, status: :not_found
+                    respond_with message: "Resource not found", status: :not_found
                 end
             end
             
             # POST create positions /api/v1/positions
             def create
-                position = Position.new(position_params)
+                position = Position.new(params.permit(:address))
                 
                 if position.save
-                    respond_with position, status: :created
+                    render json: position, status: :created
                 else
-                    respond_with position.errors, status: :unprocessable_entity
+                    render json: position.errors, status: :unprocessable_entity
                 end
             end
             
             # DELETE /api/v1/positions/:id
             def destroy
-                position.destroy
-                
-                head :no_content
+                position = Position.find_by_id(params[:id])
+                 #If position does exist
+                if !position.nil?
+                    position.destroy
+                    head :no_content
+                else
+                    respond_with message: "Resource not found", status: :not_found
+                end
             end
             
             # PUT /api/v1/positions/:id
             def update
-                if position.update(contact_params)
-                    head :no_content
+                position = Position.find_by_id(params[:id])
+                if position.update(params.permit(:address))
+                   render json: position, status: :ok
                 else
                     respond_with position.errors, status: :unprocessable_entity
                 end

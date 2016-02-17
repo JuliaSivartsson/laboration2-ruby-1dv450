@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160216083831) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "apps", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160216083831) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "apps", ["user_id"], name: "index_apps_on_user_id"
+  add_index "apps", ["user_id"], name: "index_apps_on_user_id", using: :btree
 
   create_table "positions", force: :cascade do |t|
     t.string   "address"
@@ -41,15 +44,15 @@ ActiveRecord::Schema.define(version: 20160216083831) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "restaurants", ["position_id"], name: "index_restaurants_on_position_id"
+  add_index "restaurants", ["position_id"], name: "index_restaurants_on_position_id", using: :btree
 
   create_table "restaurants_tags", id: false, force: :cascade do |t|
     t.integer "restaurant_id", null: false
     t.integer "tag_id",        null: false
   end
 
-  add_index "restaurants_tags", ["restaurant_id", "tag_id"], name: "index_restaurants_tags_on_restaurant_id_and_tag_id"
-  add_index "restaurants_tags", ["tag_id", "restaurant_id"], name: "index_restaurants_tags_on_tag_id_and_restaurant_id"
+  add_index "restaurants_tags", ["restaurant_id", "tag_id"], name: "index_restaurants_tags_on_restaurant_id_and_tag_id", using: :btree
+  add_index "restaurants_tags", ["tag_id", "restaurant_id"], name: "index_restaurants_tags_on_tag_id_and_restaurant_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"

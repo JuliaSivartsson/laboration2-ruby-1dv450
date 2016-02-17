@@ -30,6 +30,12 @@ gem 'responders', '~> 2.0'
 
 gem 'geocoder'
 
+gem 'omniauth-github'
+
+gem 'jwt'
+
+gem 'pg', '~> 0.18.2'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
