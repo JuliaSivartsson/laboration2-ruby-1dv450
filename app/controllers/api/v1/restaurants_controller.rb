@@ -34,20 +34,21 @@ module Api
             
             # POST create new restaurant and add tags /api/v1/restaurants
             def create
-                restaurant = Restaurant.new(params.permit(:name, :message, :rating, :position_id))
+                restaurant = Restaurant.new(restaurant_params.except(:tags))
             
                 #Check if params for tags are present
-                #if params[:tags].present?
-                    #tags_params = restaurant_params[:tags]
-                    #tags_params.each do |tag|
+                if restaurant_params[:tags].present?
+                    tags_params = restaurant_params[:tags]
+                    
+                    tags_params.each do |tag|
                         #If tag already exists then just add a reference between that tag and restaurant
-                     #   if Tag.exists?(tag[:name])
-                     #       restaurant.tags << tag
-                     #   else
-                     #       restaurant.tags << Tag.new(tag)
-                     #   end
-                #    end
-                #end
+                        if Tag.exists?(tag)
+                            restaurant.tags << Tag.find_by_name(tag["name"])
+                        else
+                            restaurant.tags << Tag.new(tag)
+                        end
+                    end
+                end
                 
                 if restaurant.save
                     render json: restaurant, status: :created
@@ -83,7 +84,7 @@ module Api
             #Get params for creating new restaurant
             def restaurant_params
                 json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-                json_params.permit(:name, :message, :rating, :position_id)
+                json_params.require(:restaurant).permit(:name, :message, :rating, :position_id, :tags => [:name])
             end
         end
     end
