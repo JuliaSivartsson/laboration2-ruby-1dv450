@@ -5,7 +5,7 @@ jsigc09
 
 Heroku: [laboration1-Heroku](https://arcane-harbor-88997.herokuapp.com/)
 
-Cloud9: [laboration1-Cloud9](https://laboration2-api-juliasivartsson.c9users.io/)
+Cloud9: [laboration2-Cloud9](https://laboration2-api-juliasivartsson.c9users.io)
 
 ##Viktigt
 
