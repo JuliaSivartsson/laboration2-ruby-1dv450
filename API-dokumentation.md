@@ -3,9 +3,7 @@
 
 Baslänk till api-anrop: **https://laboration2-api-juliasivartsson.c9users.io/api/v1/**
 
-vid varje anrop måste en **API nyckel** skickas med
-
-Exempel:
+vid varje anrop måste en **API nyckel** skickas med, exempel:
 
 https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants?access_token=PLACERA_API_NYCKEL_HÄR
 
