@@ -10,11 +10,11 @@ Cloud9: [laboration1-Cloud9](https://laboration2-api-juliasivartsson.c9users.io/
 ##Viktigt
 
 Om applikationen körs på egen maskin, finns det tre viktiga steg för att få den att fungera.
-`
+
 * bundle install
 * rake db:schema:load
 * rake db:seed
-`
+
 
 För att sedan få igång applikationen att rulla och starta upp databasen behövs följande kommandon:
 * rails s -p $PORT -b $IP
