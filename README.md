@@ -9,7 +9,7 @@ Cloud9: [laboration1-Cloud9](https://laboration2-api-juliasivartsson.c9users.io/
 
 ##Viktigt
 
-Om applikationen körs på egen maskin, finns det tre viktiga steg för att få den att fungera.
+Om applikationen körs på egen maskin, finns det tre viktiga steg för att få den att fungera. Kör följande kommandon:
 
 * bundle install
 * rake db:schema:load
