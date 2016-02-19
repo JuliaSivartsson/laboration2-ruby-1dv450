@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :set_cache_buster
+  include Knock::Authenticable
+  
   
   #DEFAULT PARAMETERS
   OFFSET = 0
@@ -40,7 +43,50 @@ class ApplicationController < ActionController::Base
   
   def restrict_access
     api_key = App.find_by_apikey(params[:access_token])
-    head :unauthorized unless api_key
+    
+    #If key does not exist
+    unless api_key
+      render json: { message: "The API-key was not valid"}, status: :unauthorized
+    end
+  end
+  
+  #API authentication with JWT
+  def api_authenticate
+    if request.headers["Authorization"].present?
+      auth_header = request.headers['Authorization'].split(' ').last
+      @token_payload = decodeJWT auth_header.strip
+      if !@token_payload
+        render json: { error: 'The provided token wasn´t correct' }, status: :bad_request 
+      end
+    else
+      render json: { error: 'Need to include the Authorization header' }, status: :forbidden # The header isn´t present
+    end
+  end
+  
+  def encodeJWT(user, exp=2.hours.from_now)
+    # add the expire to the payload, as an integer
+    payload = { user_id: user.id }
+    payload[:exp] = exp.to_i
+    
+    # Encode the payload whit the application secret, and a more advanced hash method (creates header with JWT gem)
+    JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS512")
+    
+  end
+  
+  def decodeJWT(token)
+   # puts token
+    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
+   # puts payload
+    if payload[0]["exp"] >= Time.now.to_i
+      payload
+    else
+      puts "time fucked up"
+      false
+    end
+    # catch the error if token is wrong
+    rescue => error
+      puts error
+      nil
   end
   
   #def restrict_access

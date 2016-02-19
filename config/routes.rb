@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Knock::Engine => "/knock"
   
   #THIS IS FOR LABORATION1
     root 'sessions#login'
