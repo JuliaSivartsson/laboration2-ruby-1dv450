@@ -143,10 +143,8 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 **Skapa**
 
 Följande egenskaper måste vara närvarande för att anropet ska godkännas:
-* name
-* message
-* rating
-* position
+* address
+
 ```
 {
     "position": {
