@@ -185,7 +185,7 @@ Exempel:
 
 **Uppdatera**
 
-PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags/:tagId.xml?access_token=ACCESS_TOKEN
+PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/positions/:positionId.xml?access_token=ACCESS_TOKEN
 ```
 {
     "position": {
