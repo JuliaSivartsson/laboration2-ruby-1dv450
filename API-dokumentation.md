@@ -117,6 +117,8 @@ Vid visning av en specifik tagg får man även ut vilka restauranger som är kop
 
 **Radera**
 
+DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags/:tagId.xml?access_token=ACCESS_TOKEN
+
 --------------
 
 ##Platser
@@ -147,4 +149,7 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 --------------
 
 **Radera**
+
+DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/positions/:positionId.xml?access_token=ACCESS_TOKEN
+
 --------------
