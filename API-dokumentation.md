@@ -24,6 +24,7 @@ Exempel för att skapa en restaurang med tillhörande taggar samt en position:
 
 
 `
+
 {
     "restaurant": {
         "name": "Dalek's Diner",
@@ -40,6 +41,7 @@ Exempel för att skapa en restaurang med tillhörande taggar samt en position:
         }
     }
 }
+
 `
 
 **Uppdatera**
