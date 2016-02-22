@@ -68,6 +68,18 @@ Exempel för att skapa en restaurang med tillhörande taggar samt en position:
 
 PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
+Exempel:
+
+```
+{
+    "restaurant": {
+        "name": "Min nya restaurang",
+        "message": "Nytt namn, ny look",
+        "rating": "4"
+    }
+}
+```
+
 --------------
 
 **Radera**
