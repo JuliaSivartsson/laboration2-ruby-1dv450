@@ -145,6 +145,7 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 Följande egenskaper måste vara närvarande för att anropet ska godkännas:
 * address
 
+Exempel:
 ```
 {
     "position": {
