@@ -86,28 +86,55 @@ Exempel:
 
 DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
+--------------
+
 ##Taggar
 **Visa alla**
 
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
+
+Vid visning av samtliga taggar får man även ut vilka restauranger som är kopplade till respektive tagg.
+--------------
+
 **Visa en**
+
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:tagId.xml?access_token=ACCESS_TOKEN
+
+Vid visning av en specifik tagg får man även ut vilka restauranger som är kopplade till taggen.
+--------------
 
 OBS! Följande anrop kräver autentisering
 
 **Skapa**
 
+--------------
+
 **Uppdatera**
 
+--------------
+
 **Radera**
+
+--------------
 
 ##Platser
 **Visa alla**
 
+--------------
+
 **Visa en**
+
+--------------
 
 OBS! Följande anrop kräver autentisering
 
 **Skapa**
 
+--------------
+
 **Uppdatera**
 
+--------------
+
 **Radera**
+--------------
