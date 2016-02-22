@@ -25,7 +25,7 @@ https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restauran
 Vid visning av en specifik restaurang får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
 
 
-OBS! Följande anrop kräver autentisering
+*OBS! Följande anrop kräver autentisering*
 
 **Skapa**
 
