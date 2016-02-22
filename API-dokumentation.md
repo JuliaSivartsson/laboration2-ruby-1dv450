@@ -28,6 +28,7 @@ Vid visning av en specifik restaurang får man även ut vilken position restaura
 *OBS! Följande anrop kräver autentisering*
 
 **Skapa**
+
 Följande egenskaper måste vara närvarande för att anropet ska godkännas:
 * name
 * message
