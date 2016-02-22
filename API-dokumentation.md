@@ -94,6 +94,7 @@ DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:re
 GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
 
 Vid visning av samtliga taggar får man även ut vilka restauranger som är kopplade till respektive tagg.
+
 --------------
 
 **Visa en**
@@ -101,6 +102,7 @@ Vid visning av samtliga taggar får man även ut vilka restauranger som är kopp
 GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:tagId.xml?access_token=ACCESS_TOKEN
 
 Vid visning av en specifik tagg får man även ut vilka restauranger som är kopplade till taggen.
+
 --------------
 
 OBS! Följande anrop kräver autentisering
