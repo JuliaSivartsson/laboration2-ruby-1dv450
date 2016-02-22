@@ -34,7 +34,7 @@ module Api
             
             # POST create positions /api/v1/positions
             def create
-                position = Position.new(params.permit(:address))
+                position = Position.new(position_params)
                 
                 if position.save
                     render json: position, status: :created
@@ -58,7 +58,7 @@ module Api
             # PUT /api/v1/positions/:id
             def update
                 position = Position.find_by_id(params[:id])
-                if position.update(params.permit(:address))
+                if position.update(position_params)
                    render json: position, status: :ok
                 else
                     respond_with position.errors, status: :unprocessable_entity

@@ -21,7 +21,7 @@ Knock.setup do |config|
   ## You must raise ActiveRecord::RecordNotFound if the resource cannot be retrieved.
   ##
   ## Default:
-  config.current_user_from_handle = -> (handle) { User.find_by! Knock.handle_attr => handle }
+  #config.current_user_from_handle = -> (handle) { User.find_by_name! Knock.handle_attr => handle }
 
   ## Current user retrieval when validating token
   ## --------------------------------------------
@@ -33,7 +33,6 @@ Knock.setup do |config|
   ## You must raise ActiveRecord::RecordNotFound if the resource cannot be retrieved.
   ##
   ## Default:
-  
   config.current_user_from_token = -> (claims) { User.find claims['sub'] }
 
 
@@ -43,7 +42,7 @@ Knock.setup do |config|
   ## How long before a token is expired.
   ##
   ## Default:
-  # config.token_lifetime = 1.day
+  config.token_lifetime = 1.day
 
 
   ## Audience claim
@@ -72,7 +71,7 @@ Knock.setup do |config|
   ## Configure the key used to sign tokens.
   ##
   ## Default:
-  # config.token_secret_signature_key = -> { Rails.application.secrets.secret_key_base }
+  config.token_secret_signature_key = -> { Rails.application.secrets.secret_key_base }
 
   ## If using Auth0, uncomment the line below
   # config.token_secret_signature_key = -> { JWT.base64url_decode Rails.application.secrets.auth0_client_secret }

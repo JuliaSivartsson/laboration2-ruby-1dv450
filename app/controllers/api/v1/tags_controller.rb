@@ -37,7 +37,7 @@ module Api
             
             # POST create tag /api/v1/tags
             def create
-                tag = Tag.new(params.permit(:name))
+                tag = Tag.new(tag_params)
                 
                 if tag.save
                    render json: tag, status: :created
@@ -61,7 +61,7 @@ module Api
             # PUT update one tag /api/v1/tags/:id
             def update
                 tag = Tag.find_by_id(params[:id])
-                if tag.update(params.permit(:name))
+                if tag.update(tag_params)
                    render json: tag, status: :ok
                 else
                     respond_with tag.errors, status: :unprocessable_entity

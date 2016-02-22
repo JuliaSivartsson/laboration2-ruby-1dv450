@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_cache_buster
-  include Knock::Authenticable
+  #include Knock::Authenticable
   
   
   #DEFAULT PARAMETERS
@@ -69,13 +69,13 @@ class ApplicationController < ActionController::Base
     payload[:exp] = exp.to_i
     
     # Encode the payload whit the application secret, and a more advanced hash method (creates header with JWT gem)
-    JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS512")
+    JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS256")
     
   end
   
   def decodeJWT(token)
    # puts token
-    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
+    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS256")
    # puts payload
     if payload[0]["exp"] >= Time.now.to_i
       payload
