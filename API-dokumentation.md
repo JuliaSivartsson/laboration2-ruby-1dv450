@@ -109,6 +109,19 @@ Vid visning av en specifik tagg får man även ut vilka restauranger som är kop
 
 **Skapa**
 
+Följande egenskaper måste vara närvarande för att anropet ska godkännas:
+* name
+
+Exempel:
+
+```
+{
+    "tag": {
+        "name": "#awesomefood"
+    }
+}
+```
+
 --------------
 
 **Uppdatera**
@@ -150,7 +163,6 @@ Exempel:
 {
     "position": {
         "address": "Storgatan 1 Växjö"
-
     }
 }
 ```
