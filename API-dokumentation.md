@@ -19,7 +19,9 @@ https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access
 OBS! Följande anrop kräver autentisering
 
 **Skapa**
+
 Exempel för att skapa en restaurang med tillhörande taggar samt en position:
+
 
 `
 {
