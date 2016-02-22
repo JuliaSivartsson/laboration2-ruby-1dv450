@@ -91,7 +91,7 @@ DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:re
 ##Taggar
 **Visa alla**
 
-GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags.xml?access_token=ACCESS_TOKEN
 
 Vid visning av samtliga taggar får man även ut vilka restauranger som är kopplade till respektive tagg.
 
@@ -99,13 +99,13 @@ Vid visning av samtliga taggar får man även ut vilka restauranger som är kopp
 
 **Visa en**
 
-GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:tagId.xml?access_token=ACCESS_TOKEN
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags/:tagId.xml?access_token=ACCESS_TOKEN
 
 Vid visning av en specifik tagg får man även ut vilka restauranger som är kopplade till taggen.
 
 --------------
 
-OBS! Följande anrop kräver autentisering
+*OBS! Följande anrop kräver autentisering*
 
 **Skapa**
 
@@ -122,13 +122,21 @@ OBS! Följande anrop kräver autentisering
 ##Platser
 **Visa alla**
 
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/positions?access_token=ACCESS_TOKEN
+
+Vid visning av samtliga platser får man även ut vilka restauranger som finns på respektiva plats.
+
 --------------
 
 **Visa en**
 
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/positions/:positionId.xml?access_token=ACCESS_TOKEN
+
+Vid visning av en specifik position får man även ut vilka restauranger som finns på platsen.
+
 --------------
 
-OBS! Följande anrop kräver autentisering
+*OBS! Följande anrop kräver autentisering*
 
 **Skapa**
 
