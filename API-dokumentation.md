@@ -109,6 +109,8 @@ Vid visning av en specifik tagg får man även ut vilka restauranger som är kop
 
 **Skapa**
 
+POST https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags.xml?access_token=ACCESS_TOKEN
+
 Följande egenskaper måste vara närvarande för att anropet ska godkännas:
 * name
 
@@ -125,6 +127,16 @@ Exempel:
 --------------
 
 **Uppdatera**
+
+PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags/:tagId.xml?access_token=ACCESS_TOKEN
+
+```
+{
+    "tag": {
+        "name": "#evenmoreawesomefood"
+    }
+}
+```
 
 --------------
 
@@ -153,6 +165,8 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 
 *OBS! Resterande anrop för platser kräver autentisering*
 
+POST https://laboration2-api-juliasivartsson.c9users.io/api/v1/positions?access_token=ACCESS_TOKEN
+
 **Skapa**
 
 Följande egenskaper måste vara närvarande för att anropet ska godkännas:
@@ -170,6 +184,15 @@ Exempel:
 --------------
 
 **Uppdatera**
+
+PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/tags/:tagId.xml?access_token=ACCESS_TOKEN
+```
+{
+    "position": {
+        "address": "Värendsgatan 1 Lammhult"
+    }
+}
+```
 
 --------------
 
