@@ -28,7 +28,7 @@ Vid visning av en specifik restaurang får man även ut vilken position restaura
 
 --------------
 
-*OBS! Följande anrop kräver autentisering*
+*OBS! Resterande anrop för restauranger kräver autentisering*
 
 **Skapa**
 
@@ -105,7 +105,7 @@ Vid visning av en specifik tagg får man även ut vilka restauranger som är kop
 
 --------------
 
-*OBS! Följande anrop kräver autentisering*
+*OBS! Resterande anrop för taggar kräver autentisering*
 
 **Skapa**
 
@@ -151,7 +151,7 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 
 --------------
 
-*OBS! Följande anrop kräver autentisering*
+*OBS! Resterande anrop för platser kräver autentisering*
 
 **Skapa**
 
