@@ -18,12 +18,15 @@ GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?ac
 
 Vid visning av samtliga restaurangen får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
 
+--------------
+
 **Visa en**
 
 GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
 Vid visning av en specifik restaurang får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
 
+--------------
 
 *OBS! Följande anrop kräver autentisering*
 
@@ -59,9 +62,13 @@ Exempel för att skapa en restaurang med tillhörande taggar samt en position:
 }
 ```
 
+--------------
+
 **Uppdatera**
 
 PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
+
+--------------
 
 **Radera**
 
