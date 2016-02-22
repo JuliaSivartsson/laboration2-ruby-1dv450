@@ -19,6 +19,26 @@ https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access
 OBS! Följande anrop kräver autentisering
 
 **Skapa**
+Exempel för att skapa en restaurang med tillhörande taggar samt en position:
+
+`
+{
+    "restaurant": {
+        "name": "Dalek's Diner",
+        "message": "Exterminate!",
+        "rating": "5",
+    
+        "tags": [
+            {"name": "#doctorwho"},
+            {"name": "#awesome"}
+        ],
+    
+        "position": {
+            "address": "Storgatan 1 Växjö"
+        }
+    }
+}
+`
 
 **Uppdatera**
 
