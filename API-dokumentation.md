@@ -14,13 +14,13 @@ https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access
 ##Restauranger
 **Visa alla**
 
-https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
 
 Vid visning av samtliga restaurangen får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
 
 **Visa en**
 
-https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
+GET https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
 Vid visning av en specifik restaurang får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
 
@@ -28,6 +28,13 @@ Vid visning av en specifik restaurang får man även ut vilken position restaura
 *OBS! Följande anrop kräver autentisering*
 
 **Skapa**
+Följande egenskaper måste vara närvarande för att anropet ska godkännas:
+* name
+* message
+* rating
+* position
+
+POST https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=ACCESS_TOKEN
 
 Exempel för att skapa en restaurang med tillhörande taggar samt en position:
 
@@ -53,7 +60,11 @@ Exempel för att skapa en restaurang med tillhörande taggar samt en position:
 
 **Uppdatera**
 
+PUT https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
+
 **Radera**
+
+DELETE https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
 ##Taggar
 **Visa alla**
