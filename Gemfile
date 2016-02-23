@@ -30,13 +30,9 @@ gem 'responders', '~> 2.0'
 
 gem 'geocoder'
 
-gem 'omniauth-github'
-
 gem 'jwt'
 
-#https://github.com/nsarno/knock let's se if this works
-gem 'knock'
-
+#PostgreSQL as database - mostly to get it working with Heroku
 gem 'pg', '~> 0.18.2'
 
 # Use Unicorn as the app server

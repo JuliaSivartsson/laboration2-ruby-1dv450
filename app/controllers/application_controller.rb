@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_cache_buster
-  #include Knock::Authenticable
   
   
   #DEFAULT PARAMETERS
@@ -41,6 +40,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  #Check for api-key
   def restrict_access
     api_key = App.find_by_apikey(params[:access_token])
     
@@ -52,6 +52,8 @@ class ApplicationController < ActionController::Base
   
   #API authentication with JWT
   def api_authenticate
+    
+    #Is there any Authorization in the header
     if request.headers["Authorization"].present?
       auth_header = request.headers['Authorization'].split(' ').last
       @token_payload = decodeJWT auth_header.strip
@@ -59,42 +61,34 @@ class ApplicationController < ActionController::Base
         render json: { error: 'The provided token wasn´t correct' }, status: :bad_request 
       end
     else
-      render json: { error: 'Need to include the Authorization header' }, status: :forbidden # The header isn´t present
+      render json: { error: 'Need to include the Authorization header' }, status: :forbidden
     end
   end
   
-  def encodeJWT(user, exp=2.hours.from_now)
-    # add the expire to the payload, as an integer
-    payload = { user_id: user.id }
-    payload[:exp] = exp.to_i
-    
-    # Encode the payload whit the application secret, and a more advanced hash method (creates header with JWT gem)
-    JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS256")
-    
+  #Found help here:
+  #http://adamalbrecht.com/2015/07/20/authentication-using-json-web-tokens-using-rails-and-react/    
+      
+  #Send in logged in user and encode it into a JWT Token
+  def authentication_payload(user)
+      return nil unless user && user.id
+      {
+        auth_token: encodeJWT({ user_id: user.id }),
+        user: { id: user.id, username: user.name } # return whatever user info you need
+      }
   end
   
-  def decodeJWT(token)
-   # puts token
-    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS256")
-   # puts payload
-    if payload[0]["exp"] >= Time.now.to_i
-      payload
-    else
-      puts "time fucked up"
-      false
-    end
-    # catch the error if token is wrong
-    rescue => error
-      puts error
-      nil
+  #Encode a hash in a json web token
+  def encodeJWT(payload, ttl_in_minutes = 60 * 24 * 30)
+    payload[:exp] = ttl_in_minutes.minutes.from_now.to_i
+    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+  end
+
+  #Decode a token and return the payload inside
+  def decodeJWT(token, leeway = nil)
+    decoded = JWT.decode(token, Rails.application.secrets.secret_key_base, leeway: leeway)
+    HashWithIndifferentAccess.new(decoded[0])
   end
   
-  #def restrict_access
-      #authenticate_or_request_with_http_token do |token, options|
-          #App.exists?(apikey: token)
-      #end
-  #end
-            
   protected
   
   def set_cache_buster

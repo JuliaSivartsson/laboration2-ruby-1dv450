@@ -1,12 +1,17 @@
 module Api
     module V1
         class PositionsController < ApplicationController
-            #http_basic_authenticate_with name: "admin", password: "hejsan"
             
             protect_from_forgery with: :null_session
             
             #Make sure apikey is present
             before_filter :restrict_access
+            
+            #For some functions we need to make sure user has a JWT token
+            before_filter :api_authenticate, only: [:create, :update, :delete]
+            
+            #If user wants to set own offset and limit, these are defined in application_controller
+            before_filter :offset_params, only: [:index, :nearby]
             
             #Return response in json or xml
             respond_to :json, :xml

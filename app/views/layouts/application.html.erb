@@ -40,6 +40,12 @@
 			<p><%=flash[:notice]%></p>
 		</div>
 	<%end%>
+	
+	<%if flash[:JWTToken]%>
+			<div class="JWTToken">
+				<p><%=flash[:JWTToken]%></p>
+		</div>
+	<%end%>
 <%= yield %>
 
 </body>
