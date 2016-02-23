@@ -10,6 +10,19 @@ vid varje anrop måste en **API nyckel** skickas med, exempel:
 `
 https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=PLACERA_API_NYCKEL_HÄR
 `
+##Autentisering
+
+För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom att logga in på (applikationens hemsida)[https://laboration2-api-juliasivartsson.c9users.io], antingen genom att skapa ett konto eller använd eller använda det testkonto som finns:
+
+Användarnamn: **DemoUser**
+Lösenord: **secret**
+
+En JWT Token (kallad "auth_token") kommer vid inloggning att generas och visas, kopiera denna och skicka med i headern vid ditt anrop till Api-et.
+
+Exempel:
+**Authorization: Bearer AUTH_TOKEN**
+(Bearer behövs för JWT Tokens)
+
 
 ##Restauranger
 **Visa alla**
