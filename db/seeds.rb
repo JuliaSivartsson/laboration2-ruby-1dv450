@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create([{name: "admin", password: "hejsan", password_confirmation: "hejsan"}, {name: "itzy", password: "hejsan", password_confirmation: "hejsan"}])
+User.create([{name: "admin", password: "hejsan", password_confirmation: "hejsan"}, {name: "DemoUser", password: "secret", password_confirmation: "secret"}, {name: "itzy", password: "hejsan", password_confirmation: "hejsan"}])
 
-App.create(name: "itzy's app", description: "min app", user_id: 2)
+App.create(name: "itzy's app", description: "min app", user_id: 3)
 
 Restaurant.create([{name: "Itzy's place", message: "Jävligt snygg restaurang", rating: 4, position_id: 1}, 
                 {name: "Mammas mat!", message: "Världens bästa!", rating: 5, position_id: 1},

@@ -30,6 +30,8 @@ gem 'responders', '~> 2.0'
 
 gem 'geocoder'
 
+gem 'omniauth-github'
+
 gem 'jwt'
 
 #PostgreSQL as database - mostly to get it working with Heroku
