@@ -12,7 +12,7 @@ https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access
 `
 ##Autentisering
 
-För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom att logga in på (applikationens hemsida)[https://laboration2-api-juliasivartsson.c9users.io], antingen genom att skapa ett konto eller använd eller använda det testkonto som finns:
+För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom att logga in på [applikationens hemsida](https://laboration2-api-juliasivartsson.c9users.io), antingen genom att skapa ett konto eller använd eller använda det testkonto som finns:
 
 Användarnamn: **DemoUser**
 Lösenord: **secret**
