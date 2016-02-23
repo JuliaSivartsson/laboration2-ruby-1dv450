@@ -20,9 +20,12 @@ För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et
 En JWT Token (kallad "auth_token") kommer vid inloggning att generas och visas, kopiera denna och skicka med i headern vid ditt anrop till Api-et.
 
 Exempel:
+
 **Authorization: Bearer AUTH_TOKEN**
+
 (Bearer behövs för JWT Tokens)
 
+----------------------
 
 ##Restauranger
 **Visa alla**
