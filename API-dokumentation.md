@@ -5,11 +5,16 @@ Baslänk till api-anrop: `https://laboration2-api-juliasivartsson.c9users.io/api
 
 Resultatet går att få ut i både json och xml. Json är standard och för att få ut xml lägger du helt enkelt till det i URL-en, se exempel nedan.
 
+##API-nyckel
+
 vid varje anrop måste en **API nyckel** skickas med, exempel:
 
 `
 https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants.xml?access_token=PLACERA_API_NYCKEL_HÄR
 `
+
+Nyckel skaffar du genom att skapa en användare på på [applikationens hemsida](https://laboration2-api-juliasivartsson.c9users.io), loggar in och lägger till en ny app för din användare. En Api-nyckel kommer då att genereras som du kan använda dig av vid anrop mot api-et.
+
 ##Autentisering
 
 För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom att logga in på [applikationens hemsida](https://laboration2-api-juliasivartsson.c9users.io), antingen genom att skapa ett konto eller använd eller använda det testkonto som finns:
