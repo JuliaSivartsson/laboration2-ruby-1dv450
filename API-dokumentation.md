@@ -46,6 +46,19 @@ Exempel:
 
 **Authorization: AUTH_TOKEN**
 
+##Limit & offset
+
+Det går att ställa in limit och offset.
+
+Limit = Hur många ska hämtas ut, default är 20.
+Offset = Hur långt från start ska hämtningen börja, default är 0.
+
+Exempel:
+
+https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants?limit=2&offset=3&access_token=ACCESS_TOKEN
+
+Detta går att göra vid visning av alla restauranger, positioner, taggar samt vid visning av närliggande platser.
+
 ----------------------
 
 ##Restauranger
