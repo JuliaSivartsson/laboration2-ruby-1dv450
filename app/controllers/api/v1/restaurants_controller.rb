@@ -39,12 +39,11 @@ module Api
                         respond_with @response, include: [:position, :tags], status: :ok
                     end
                     if params[:longitude] && params[:latitude]
-                        nearby_locations = Position.near([params[:longitude], params[:latitude]], 50)
+                        nearby_locations = Position.near([params[:latitude], params[:longitude]], 50)
                         restaurants = []
                         nearby_locations.each do |loc|
                             restaurants.push(Restaurant.where(:position_id => loc.id))
                         end
-                        
                                                             
                         #Offset and limit
                         restaurants = restaurants.drop(@offset)
@@ -68,8 +67,15 @@ module Api
                         
                         @response = {:offset => @offset, :limit => @limit, nearby_locations: nearby_locations, nrOfRestaurants: count_restaurants}
                         respond_with @response, include: [:restaurants], status: :ok
+                    else
+                        #Offset and limit
+                        restaurants = restaurants.drop(@offset)
+                        restaurants = restaurants.take(@limit)
+                        count_restaurants = restaurants.count
+                        
+                        @response = {:offset => @offset, :limit => @limit, restaurants: restaurants, nrOfRestaurants: count_restaurants}
+                        respond_with @response, include: [:position, :tags], status: :ok
                     end
-
                 else
                     render json: {error: "Couldn't find any restaurants :(", status: :not_found}
                 end

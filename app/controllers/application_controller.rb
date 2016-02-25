@@ -52,45 +52,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  #API authentication with JWT
-  def api_authenticate
-    
-    #Is there any Authorization in the header
-    if request.headers["Authorization"].present?
-      auth_header = request.headers['Authorization'].split(' ').last
-      @token_payload = decodeJWT auth_header.strip
-      if !@token_payload
-        render json: { error: 'The provided token wasn´t correct' }, status: :bad_request 
-      end
-    else
-      render json: { error: 'Need to include the Authorization header' }, status: :forbidden
-    end
-  end
-  
-  #Found help here:
-  #http://adamalbrecht.com/2015/07/20/authentication-using-json-web-tokens-using-rails-and-react/    
-      
-  #Send in logged in user and encode it into a JWT Token
-  def authentication_payload(user)
-      return nil unless user && user.id
-      {
-        auth_token: encodeJWT({ user_id: user.id }),
-        user: { id: user.id, username: user.name } # return whatever user info you need
-      }
-  end
-  
-  #Encode a hash in a json web token
-  def encodeJWT(payload, ttl_in_minutes = 60 * 24 * 30)
-    payload[:exp] = ttl_in_minutes.minutes.from_now.to_i
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
-  end
-
-  #Decode a token and return the payload inside
-  def decodeJWT(token, leeway = nil)
-    decoded = JWT.decode(token, Rails.application.secrets.secret_key_base, leeway: leeway)
-    HashWithIndifferentAccess.new(decoded[0])
-  end
-  
   protected
   
   def set_cache_buster
