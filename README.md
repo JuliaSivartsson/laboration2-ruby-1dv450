@@ -11,25 +11,19 @@ Cloud9: [laboration2-Cloud9](https://laboration2-api-juliasivartsson.c9users.io)
 
 ```
 Skapa ett konto på https://c9.io/ eller logga in med ditt befintliga konto.
-
 Välj "Create a new workspace"
-
 Fyll i name på ditt nya workspace
-
 Under rubriken "Clone from Git or Mercurial URL" klistra in följande: 
 https://github.com/JuliaSivartsson/laboration2-ruby-1dv450.git
 
 Klicka på "Create workspace"
 
 I terminalfönstret skriver du följande kommandon:
-
 bundle update
 rake db:reset
 
 
 För att starta igång servern skriver du in följande:
-
-
 sudo service postgresql start
 rails s -p $PORT -b $IP
 
