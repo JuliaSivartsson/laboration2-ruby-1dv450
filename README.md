@@ -40,10 +40,10 @@ För att komma åt admin kontot finns följande inloggningsuppgifter:
 
 Dokumentation om API:et hittar ni här: [API-dokumentation](https://github.com/JuliaSivartsson/laboration2-ruby-1dv450/blob/master/API-dokumentation)
 
-Postman-fil:
+Postman-collection:
 
 ```
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/6c39b4ee459566d4c536)
+https://www.getpostman.com/collections/6c39b4ee459566d4c536
 ```
 
 Vid problem, kontakta mig på: jsigc09@student.lnu.se
