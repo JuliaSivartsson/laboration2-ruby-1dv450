@@ -55,7 +55,7 @@ Offset = Hur långt från start ska hämtningen börja, default är 0.
 
 Exempel:
 
-https://laboration2-api-juliasivartsson.c9users.io/api/v1/restaurants?limit=2&offset=3&access_token=ACCESS_TOKEN
+GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants?limit=2&offset=3&access_token=ACCESS_TOKEN
 
 Detta går att göra vid visning av alla restauranger, positioner, taggar samt vid visning av närliggande platser.
 
