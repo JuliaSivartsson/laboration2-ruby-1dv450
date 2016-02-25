@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216083831) do
+ActiveRecord::Schema.define(version: 20160225070137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20160216083831) do
 
   add_index "apps", ["user_id"], name: "index_apps_on_user_id", using: :btree
 
+  create_table "creators", force: :cascade do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string   "address"
     t.float    "longitude"
@@ -40,10 +48,12 @@ ActiveRecord::Schema.define(version: 20160216083831) do
     t.string   "message"
     t.integer  "rating"
     t.integer  "position_id"
+    t.integer  "creator_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "restaurants", ["creator_id"], name: "index_restaurants_on_creator_id", using: :btree
   add_index "restaurants", ["position_id"], name: "index_restaurants_on_position_id", using: :btree
 
   create_table "restaurants_tags", id: false, force: :cascade do |t|

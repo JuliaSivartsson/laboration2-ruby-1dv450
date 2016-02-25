@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Knock::Engine => "/knock"
   
   #THIS IS FOR LABORATION1
     root 'sessions#login'
@@ -32,6 +33,10 @@ namespace :api, :defaults => { :format => :json} do
         resources :positions
         get "/positions/nearby/:long/:lat" => "positions#nearby"
         resources :tags
+        
+        resources :creators, only: [:show, :index, :create, :new, :destroy, :update] do
+          resources :restaurants, only: [:index]
+        end
     end
 end
 

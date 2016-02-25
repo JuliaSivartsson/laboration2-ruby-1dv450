@@ -69,6 +69,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
+    knock (1.4.2)
       bcrypt (~> 3.1)
       jwt (~> 1.5)
       rails (>= 4.2)
@@ -175,7 +176,7 @@ DEPENDENCIES
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
-  jwt
+  knock
   omniauth-github
   pg (~> 0.18.2)
   rails (= 4.2.5)

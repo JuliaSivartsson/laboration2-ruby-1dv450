@@ -16,8 +16,6 @@ class SessionsController < ApplicationController
           flash[:notice] = "Yay, you are now logged in!"
           flash[:color] = "valid"
           
-          #Set JWT Token as message after login - not the way it should be done but I don't know how to test it otherwise
-          flash[:JWTToken] = authentication_payload(user)
           redirect_to(:action => 'home')
         else
         

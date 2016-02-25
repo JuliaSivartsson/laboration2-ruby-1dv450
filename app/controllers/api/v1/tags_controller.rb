@@ -7,8 +7,8 @@ module Api
             before_filter :restrict_access
             before_filter :offset_params, only: [:index]
             
-            #For some functions we need to make sure user has a JWT token
-            before_filter :api_authenticate, only: [:create, :update, :delete]
+            #For some functions we need to make sure user has logged in (using Knock)
+            before_action :authenticate, only: [:create, :update, :delete]
             
             #Return response in json or xml
             respond_to :json, :xml
@@ -18,11 +18,15 @@ module Api
             
             # GET all tags /api/v1/tags
             def index
-                #Limit and offset is set in application_controller
-                tags = Tag.limit(@limit).offset(@offset)
                 
-                count_tags = Tag.distinct.count(:id)
-                @response = {tags: tags, nrOfTags: count_tags}
+                tags = Tag.all
+                
+                #Offset and limit
+                tags = tags.drop(@offset)
+                tags = tags.take(@limit)
+                count_tags = tags.count
+                
+                @response = {:offset => @offset, :limit => @limit, tags: tags, nrOfTags: count_tags}
                 respond_with @response, include: [:restaurants], status: :ok
             end
             

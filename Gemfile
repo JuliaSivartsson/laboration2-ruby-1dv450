@@ -32,7 +32,10 @@ gem 'geocoder'
 
 gem 'omniauth-github'
 
-gem 'jwt'
+#gem 'jwt'
+
+#Try knock again
+gem 'knock'
 
 #PostgreSQL as database - mostly to get it working with Heroku
 gem 'pg', '~> 0.18.2'

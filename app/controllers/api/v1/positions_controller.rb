@@ -7,8 +7,8 @@ module Api
             #Make sure apikey is present
             before_filter :restrict_access
             
-            #For some functions we need to make sure user has a JWT token
-            before_filter :api_authenticate, only: [:create, :update, :delete]
+            #For some functions we need to make sure user has logged in (using Knock)
+            before_action :authenticate, only: [:create, :update, :delete]
             
             #If user wants to set own offset and limit, these are defined in application_controller
             before_filter :offset_params, only: [:index, :nearby]
@@ -18,11 +18,15 @@ module Api
             
             # GET all positions /api/v1/positions
             def index
-                #Limit and offset is set in application_controller
-                positions = Position.limit(@limit).offset(@offset)
                 
-                count_positions = Position.distinct.count(:id)
-                @response = {positions: positions, nrOfPositions: count_positions}
+                positions = Position.all
+                
+                #Offset and limit
+                positions = positions.drop(@offset)
+                positions = positions.take(@limit)
+                count_positions = positions.count
+                
+                @response = {:offset => @offset, :limit => @limit, positions: positions, nrOfPositions: count_positions}
                 respond_with @response, include: [:restaurants], status: :ok
             end
             
@@ -74,9 +78,16 @@ module Api
             def nearby
                 # Check the parameters
                 if params[:long].present? && params[:lat].present?
-                  # using the parameters and offset/limit
-                  nearby_positions = Position.near([params[:lat].to_f, params[:long].to_f], 30).limit(@limit).offset(@offset)
-                  respond_with nearby_positions, include: [:restaurants], status: :ok
+                  # using the parameters
+                  nearby_positions = Position.near([params[:lat], params[:long]], 50)
+                  
+                  #Offset and limit
+                  nearby_positions = nearby_positions.drop(@offset)
+                  nearby_positions = nearby_positions.take(@limit)
+                  count_positions = nearby_positions.count
+                    
+                  @response = {:offset => @offset, :limit => @limit, nearby_positions: nearby_positions, nrOfNearbyPosition: count_positions}
+                  respond_with @response, include: [:restaurants], status: :ok
                 else
                   render json: position.errors, status: :bad_request # just json in this example
                 end

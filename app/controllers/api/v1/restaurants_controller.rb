@@ -8,20 +8,71 @@ module Api
             before_filter :restrict_access
             before_filter :offset_params, only: [:index]
             
-            #For some functions we need to make sure user has a JWT token
-            before_filter :api_authenticate, only: [:create, :update, :delete]
+            #For some functions we need to make sure user has logged in (using Knock)
+            before_action :authenticate, only: [:create, :update, :delete]
 
             #Return response in json or xml
             respond_to :json, :xml
             
             # GET all restaurants /api/v1/restaurants
             def index
-                #Limit and offset is set in application_controller
-                restaurants = Restaurant.limit(@limit).offset(@offset).order("created_at DESC")
                 
-                count_restaurants = Restaurant.distinct.count(:id)
-                @response = {restaurants: restaurants, nrOfRestaurants: count_restaurants}
-                respond_with @response, include: [:position, :tags], status: :ok
+                restaurants = Restaurant.all.order("created_at DESC")
+                
+                if restaurants.present?
+                    query_params = params[:query]
+                    if query_params.present?
+                        #Search for rating
+                        if query_params.to_i != 0
+                            restaurants = Restaurant.where(:rating => query_params)
+                        else
+                            #Search for name or message
+                            restaurants = Restaurant.where("lower(name) like :search OR lower(message) like :search", search: "%#{query_params.downcase}%")
+                        end
+                        
+                        #Offset and limit
+                        restaurants = restaurants.drop(@offset)
+                        restaurants = restaurants.take(@limit)
+                        count_restaurants = restaurants.count
+                        
+                        @response = {:offset => @offset, :limit => @limit, restaurants: restaurants, nrOfRestaurants: count_restaurants}
+                        respond_with @response, include: [:position, :tags], status: :ok
+                    end
+                    if params[:longitude] && params[:latitude]
+                        nearby_locations = Position.near([params[:longitude], params[:latitude]], 50)
+                        restaurants = []
+                        nearby_locations.each do |loc|
+                            restaurants.push(Restaurant.where(:position_id => loc.id))
+                        end
+                        
+                                                            
+                        #Offset and limit
+                        restaurants = restaurants.drop(@offset)
+                        restaurants = restaurants.take(@limit)
+                        count_restaurants = restaurants.count
+                        
+                        @response = {:offset => @offset, :limit => @limit, nearby_locations: nearby_locations, nrOfRestaurants: count_restaurants}
+                        respond_with @response, include: [:restaurants], status: :ok
+                    
+                    elsif params[:address_and_city]
+                        nearby_locations = Position.near(params[:address_and_city], 50)
+                        restaurants = []
+                        nearby_locations.each do |loc|
+                            restaurants.push(Restaurant.where(:position_id => loc.id))
+                        end
+                                                                    
+                        #Offset and limit
+                        restaurants = restaurants.drop(@offset)
+                        restaurants = restaurants.take(@limit)
+                        count_restaurants = restaurants.count
+                        
+                        @response = {:offset => @offset, :limit => @limit, nearby_locations: nearby_locations, nrOfRestaurants: count_restaurants}
+                        respond_with @response, include: [:restaurants], status: :ok
+                    end
+
+                else
+                    render json: {error: "Couldn't find any restaurants :(", status: :not_found}
+                end
             end
             
             # GET one restaurant /api/v1/restaurants/:id
@@ -30,7 +81,7 @@ module Api
                 
                 #If restaurant does exist
                 if !restaurant.nil?
-                    respond_with restaurant, include: [:position, :tags], status: :ok
+                    respond_with restaurant, include: [:creator, :position, :tags], status: :ok
                 else
                     respond_with message: "Resource not found", status: :not_found
                 end
@@ -39,6 +90,7 @@ module Api
             # POST create new restaurant and add tags /api/v1/restaurants
             def create
                 restaurant = Restaurant.new(restaurant_params.except(:tags, :position))
+                restaurant.creator_id = current_user.id
                 
                 #Check if params for tags are present
                 if restaurant_params[:tags].present?
@@ -85,7 +137,7 @@ module Api
                  #If restaurant does exist
                 if !restaurant.nil?
                     restaurant.destroy
-                    head :no_content
+                    render json: { action: "destroy", message: "The restaurant '#{restaurant.name}' has been removed.", status: :ok}
                 else
                     respond_with message: "Resource not found", status: :not_found
                 end
