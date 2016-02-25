@@ -5,11 +5,11 @@
 
 Api-et finns att nå på två ställen, rekommenderat är Heroku api-et som går att nå på följande länk:
 
-Baslänk till api-anrop på heroku: `https://limitless-falls-33806.herokuapp.com/api/v1/`
+**Baslänk till api-anrop på heroku: `https://limitless-falls-33806.herokuapp.com/api/v1/`**
 
 Om någonting skulle gå fel (alla buggar bör vara undanröjda) så finns Cloud9 att tillgå:
 
-Baslänk till api-anrop på Cloud9: `https://laboration2-api-juliasivartsson.c9users.io/api/v1/`
+**Baslänk till api-anrop på Cloud9: `https://laboration2-api-juliasivartsson.c9users.io/api/v1/`**
 
 Resultatet går att få ut i både json och xml. Json är standard och för att få ut xml lägger du helt enkelt till det i URL-en, se exempel nedan.
 
@@ -25,18 +25,39 @@ Nyckel skaffar du genom att skapa en användare på på [applikationens hemsida]
 
 ##Autentisering
 
-För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom att logga in på [applikationens hemsida](https://limitless-falls-33806.herokuapp.com/api/v1/), antingen genom att skapa ett konto eller använd eller använda det testkonto som finns:
+För att få tillgång till CRUD funktionalitet behövs autentisering mot API-et, detta görs genom följande anrop:
 
-* Användarnamn: **DemoUser**
-* Lösenord: **secret**
+POST https://limitless-falls-33806.herokuapp.com/knock/auth_token
 
-En JWT Token (kallad "auth_token") kommer vid inloggning att generas och visas, kopiera denna och skicka med i headern vid ditt anrop till Api-et.
+Giltlig email och password måste skickas med i anropet, det finns ett testkonto att använda sig av vilket är:
+
+* Email: **itzy_90@hotmail.com**
+* Lösenord: **hejsan**
 
 Exempel:
 
-**Authorization: Bearer AUTH_TOKEN**
+```
+{"auth": {"email": "itzy_90@hotmail.com", "password": "hejsan"}}
+```
 
-(Bearer behövs för JWT Tokens)
+En JWT Token kommer att generas och skickas tillbaka i responsen, kopiera denna och skicka med i headern vid ditt anrop till Api-et.
+
+Exempel:
+
+**Authorization: AUTH_TOKEN**
+
+##Limit & offset
+
+Det går att ställa in limit och offset.
+
+Limit = Hur många ska hämtas ut, default är 20.
+Offset = Hur långt från start ska hämtningen börja, default är 0.
+
+Exempel:
+
+GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants?limit=2&offset=3&access_token=ACCESS_TOKEN
+
+Detta går att göra vid visning av alla restauranger, positioner, taggar samt vid visning av närliggande platser.
 
 ----------------------
 
@@ -54,6 +75,13 @@ Vid visning av samtliga restaurangen får man även ut vilken position restauran
 GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants/:restaurantId.xml?access_token=ACCESS_TOKEN
 
 Vid visning av en specifik restaurang får man även ut vilken position restaurangen har samt vilka taggar den är kopplad till.
+
+--------------
+**Sök med query**
+
+GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants.xml?query=mamma&access_token=ACCESS_TOKEN
+
+Detta kommer att söka efter restauranger i applikationen som innehåller "mamma" antingen som name, message eller rating.
 
 --------------
 
@@ -194,13 +222,29 @@ Vid visning av en specifik position får man även ut vilka restauranger som fin
 
 **Visa närliggande restauranger**
 
+Att läsa ut närliggande platser med restauranger går att göra på tre sätt i api-et.
+
+**Alternativ 1:**
+
+Via address
+
+GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants?address_and_city=Storgatan1Växjö.xml&access_token=ACCESS_TOKEN
+
+**Alternativ 2:**
+
+Via longitude och latitude
+
+GET https://limitless-falls-33806.herokuapp.com/api/v1/restaurants?longitude=:longitude&latitude=:latitude.xml&access_token=ACCESS_TOKEN
+
+**Alternativ 3:**
+
 GET https://limitless-falls-33806.herokuapp.com/api/v1/positions/nearby/:longitude/:latitude.xml?access_token=ACCESS_TOKEN
 
 OBS! Tänk på att longitude och latitude måste skrivas med komma (,) och inte punkt (.) i url-en. Tillexempel:
 
 GET https://limitless-falls-33806.herokuapp.com/api/v1/positions/nearby/14,5860588/57,1650635.xml?access_token=ACCESS_TOKEN
 
-Vid visning av platser i närheten får man även ut de restauranger som finns på närliggande platser.
+Vid visning av platser i närheten får man även ut de restauranger som finns på närliggande platser samt hur långt ifrån sökningen som platsen ligger.
 
 --------------
 
