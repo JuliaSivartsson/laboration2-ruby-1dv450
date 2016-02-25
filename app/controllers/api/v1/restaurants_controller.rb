@@ -37,8 +37,8 @@ module Api
                         
                         @response = {:offset => @offset, :limit => @limit, restaurants: restaurants, nrOfRestaurants: count_restaurants}
                         respond_with @response, include: [:position, :tags], status: :ok
-                    end
-                    if params[:longitude] && params[:latitude]
+                        
+                    elsif params[:longitude] && params[:latitude]
                         nearby_locations = Position.near([params[:latitude], params[:longitude]], 50)
                         restaurants = []
                         nearby_locations.each do |loc|
