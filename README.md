@@ -16,7 +16,7 @@ Välj "Create a new workspace"
 
 Fyll i name på ditt nya workspace
 
-Under rubriken "Clone from Git or Mercurial URL" klistra in följande: **https://github.com/JuliaSivartsson/laboration2-ruby-1dv450.git**
+Under rubriken "Clone from Git or Mercurial URL" klistra in följande: https://github.com/JuliaSivartsson/laboration2-ruby-1dv450.git
 
 Klicka på "Create workspace"
 
