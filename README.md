@@ -38,7 +38,7 @@ För att komma åt admin kontot finns följande inloggningsuppgifter:
 
 **Lösenord:** hejsan
 
-Dokumentation om API:et hittar ni här: [API-dokumentation](https://github.com/JuliaSivartsson/laboration2-ruby-1dv450/blob/master/API-dokumentation)
+Dokumentation om API:et hittar ni här: [API-dokumentation](https://github.com/JuliaSivartsson/laboration2-ruby-1dv450/blob/master/API-dokumentation.md)
 
 Postman-collection:
 
