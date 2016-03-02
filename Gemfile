@@ -37,6 +37,9 @@ gem 'omniauth-github'
 #Try knock again
 gem 'knock'
 
+#https://github.com/rails-api/active_model_serializers
+gem 'active_model_serializers'
+
 #PostgreSQL as database - mostly to get it working with Heroku
 gem 'pg', '~> 0.18.2'
 

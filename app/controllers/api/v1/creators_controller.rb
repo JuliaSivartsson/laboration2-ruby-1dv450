@@ -1,11 +1,7 @@
 module Api
     module V1
-        class CreatorsController < ApplicationController
-            respond_to :json, :xml
-            protect_from_forgery with: :null_session
+        class CreatorsController < ApiController
             
-            #Make sure apikey is present
-            before_filter :restrict_access
             before_filter :offset_params, only: [:index]
             
             #For some functions we need to make sure user has a JWT token

@@ -17,10 +17,11 @@ Position.create([{address: "Statue of Liberty, NY"}, {address: "Värendsgatan 12
 
 tag = Tag.create(name: "#vegan")
 
-creator = Creator.create(name: "Julia", password: "hejsan", password_confirmation: "hejsan", email: "itzy_90@hotmail.com")
+creator1 = Creator.create(name: "Julia", password: "hejsan", password_confirmation: "hejsan", email: "itzy_90@hotmail.com")
+creator2 = Creator.create(name: "Itzy", password: "hejsan", password_confirmation: "hejsan", email: "bananpaj@hotmail.com")
 
 restaurant1 = Restaurant.create(name: "Bananpaj", message: "Massa bananer", rating: 4, position_id: 2, creator_id: 1)
-restaurant2 = Restaurant.create(name: "Café Kantarell", message: "Bara massa gött", rating: 5, position_id: 2, creator_id: 1)
+restaurant2 = Restaurant.create(name: "Café Kantarell", message: "Bara massa gött", rating: 5, position_id: 2, creator_id: 2)
 
 
 

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "profile" => "sessions#profile"
 
   
-  get ':controller(/:action(/:id))(.:format)'
+  #get ':controller(/:action(/:id))(.:format)'
   post ':controller(/:action(/:id))(.:format)'
   
   
@@ -23,20 +23,34 @@ Rails.application.routes.draw do
   #Add /api/v1 before URI
 namespace :api, :defaults => { :format => :json} do
     namespace :v1 do
-        get "/restaurants" => "restaurants#index"
-        post "/restaurants" => "restaurants#create"
+        #get "/restaurants" => "restaurants#index"
+        #post "/restaurants" => "restaurants#create"
         
-        get "/restaurants/:id" => "restaurants#show"
-        put "/restaurants/:id" => "restaurants#update"
-        delete "/restaurants/:id" =>"restaurants#destroy"
+        #get "/restaurants/:id" => "restaurants#show"
+        #put "/restaurants/:id" => "restaurants#update"
+        #delete "/restaurants/:id" =>"restaurants#destroy"
         
-        resources :positions
-        get "/positions/nearby/:long/:lat" => "positions#nearby"
-        resources :tags
+        #resources :positions
+        #get "/positions/nearby/:long/:lat" => "positions#nearby"
+        #resources :tags
         
-        resources :creators, only: [:show, :index, :create, :new, :destroy, :update] do
-          resources :restaurants, only: [:index]
-        end
+        #resources :creators, only: [:show, :index, :create, :new, :destroy, :update] do
+         # resources :restaurants, only: [:index]
+        #end
+      resources :restaurants, only: [:show, :index, :create, :new, :destroy, :update] do
+        resources :positions, only: [:index]
+        resources :tags, only: [:index]
+      end
+      resources :positions, only: [:show, :index, :create, :new, :destroy, :update, :nearby] do
+        resources :restaurants, only: [:index]
+      end
+      
+      resources :tags, only: [:show, :index, :create, :new, :destroy, :update] do
+        resources :restaurants, only: [:index]
+      end
+      resources :creators, only: [:show, :index, :create, :new, :destroy, :update] do
+        resources :restaurants, only: [:index]
+      end
     end
 end
 
