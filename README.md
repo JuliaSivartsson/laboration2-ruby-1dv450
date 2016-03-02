@@ -7,20 +7,29 @@ Heroku: [laboration2-Heroku](https://limitless-falls-33806.herokuapp.com/)
 
 Cloud9: [laboration2-Cloud9](https://laboration2-api-juliasivartsson.c9users.io)
 
-##Viktigt
+##Installation på cloud9
 
-Om applikationen körs på egen maskin, finns det tre viktiga steg för att få den att fungera. Kör följande kommandon:
+```
+Skapa ett konto på https://c9.io/ eller logga in med ditt befintliga konto.
+Välj "Create a new workspace"
+Fyll i name på ditt nya workspace
+Under rubriken "Clone from Git or Mercurial URL" klistra in följande: 
+https://github.com/JuliaSivartsson/laboration2-ruby-1dv450.git
 
-* bundle install
-* rake db:schema:load
-* rake db:seed
+Klicka på "Create workspace"
+
+I terminalfönstret skriver du följande kommandon:
+bundle update
+rake db:reset
 
 
-För att sedan få igång applikationen att rulla och starta upp databasen behövs följande kommandon:
-* rails s -p $PORT -b $IP
-* sudo service postgresql start
+För att starta igång servern skriver du in följande:
+sudo service postgresql start
+rails s -p $PORT -b $IP
 
-Körs ingen seed kommer felmeddelande att visas då användaren admin måste finnas i systemet samt ha id 1.
+```
+
+Se till så att seeds.rb verkligen körs, annars kommer felmeddelande att visas då användaren admin måste finnas i systemet samt ha id 1.
 Admin är den person som har fullständiga rättigheter i applikationen och kan se alla användares registrerade appar samt radera dem.
 
 För att komma åt admin kontot finns följande inloggningsuppgifter:
@@ -29,6 +38,12 @@ För att komma åt admin kontot finns följande inloggningsuppgifter:
 
 **Lösenord:** hejsan
 
-Dokumentation om API:et hittar ni här: [API-dokumentation](https://github.com/JuliaSivartsson/laboration2-ruby-1dv450/blob/master/API-dokumentation)
+Dokumentation om API:et hittar ni här: [API-dokumentation](https://github.com/JuliaSivartsson/laboration2-ruby-1dv450/blob/master/API-dokumentation.md)
+
+Postman-collection:
+
+```
+https://www.getpostman.com/collections/6c39b4ee459566d4c536
+```
 
 Vid problem, kontakta mig på: jsigc09@student.lnu.se
