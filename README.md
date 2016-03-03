@@ -3,7 +3,7 @@ jsigc09
 
 ----
 
-Heroku: [laboration2-Heroku](https://limitless-falls-33806.herokuapp.com/)
+Heroku: [laboration2-Heroku](https://powerful-inlet-94982.herokuapp.com)
 
 Cloud9: [laboration2-Cloud9](https://laboration2-api-juliasivartsson.c9users.io)
 
