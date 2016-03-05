@@ -28,6 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'responders', '~> 2.0' 
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'geocoder'
 
 gem 'omniauth-github'

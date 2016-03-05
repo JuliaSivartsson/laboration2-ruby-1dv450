@@ -80,7 +80,7 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
             respond_with @response, include: [:restaurants], status: :ok
         
         #If no parameters are in url
-        elsif
+        else
         
             restaurants = Restaurant.all.order("created_at DESC")
 
