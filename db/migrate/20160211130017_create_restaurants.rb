@@ -5,6 +5,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :name
       t.string :message
       t.integer :rating
+      t.integer :creator_id
       t.belongs_to :position, index: true
       t.timestamps null: false
     end
