@@ -35,17 +35,17 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
                 restaurants = Restaurant.where("lower(name) like :search OR lower(message) like :search", search: "%#{params[:query].downcase}%")
             end
             
-            if restaurants.exists?
+            #if restaurants.exists?
                 #Offset and limit
-                restaurants = restaurants.drop(@offset)
-                restaurants = restaurants.take(@limit)
-                count_restaurants = restaurants.count
+                #restaurants = restaurants.drop(@offset)
+                #restaurants = restaurants.take(@limit)
+                #count_restaurants = restaurants.count
                 
-                @response = {:offset => @offset, :limit => @limit, restaurants: restaurants, nrOfRestaurants: count_restaurants}
-                respond_with @response, include: [:position, :tags], status: :ok
-            else
-               respond_with ( message = { error: "Resource not found"} ), :status => :not_found
-            end
+                #@response = {:offset => @offset, :limit => @limit, restaurants: restaurants, nrOfRestaurants: count_restaurants}
+                #respond_with @response, include: [:position, :tags], status: :ok
+            #else
+               #respond_with ( message = { error: "Resource not found"} ), :status => :not_found
+            #end
             
         #If lat and long is in url
         elsif params[:longitude] && params[:latitude]
