@@ -169,10 +169,10 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
             end
             
             #If a position only has this restaurant connected to it, then remove it
-            position = restaurant.position
-            if position.restaurants.size == 1
-                position.destroy
-            end
+            #position = restaurant.position
+            #if position.restaurants.size == 1
+            #    position.destroy
+            #end
                 
             restaurant.destroy
             render json: { action: "destroy", message: "The restaurant '#{restaurant.name}' has been removed.", status: :ok}
