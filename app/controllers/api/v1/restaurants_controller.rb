@@ -202,15 +202,20 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
             
             #Check if params for position are present
             if restaurant_params[:position].present?
+                position = restaurant_params[:position]
                 
-                position_params = restaurant_params[:position]
-                
-                    #If tag already exists then just add a reference between that tag and restaurant
-                    if Position.exists?(position_params)
-                        restaurant.position << Position.find_by_name(position_params["address"])
-                    else
-                        restaurant.position << Position.new(position_params)
-                    end
+                #If position already exists then just add a reference to it
+                if Position.exists?(position)
+                    this_position = Position.find_by_address(position["address"])
+                    restaurant.position_id = this_position.id
+                    restaurant.save
+                else
+                    #If position does not exists, create a new one
+                    new_position = Position.new(position)
+                    new_position.save
+                    restaurant.position_id = new_position.id
+                    restaurant.save
+                end
             end
             
             if restaurant.update(restaurant_params)
