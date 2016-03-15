@@ -162,9 +162,11 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
         if !(restaurant = @current_user.restaurants.find_by_id(params[:id])).nil?
             
             #If a tag only has this restaurant connected to it, then remove it
-            restaurant.tags.each do |tag|
-                if tag.restaurants.size == 1
-                    tag.destroy
+            if (restaurant.tags)
+                restaurant.tags.each do |tag|
+                    if tag.restaurants.size == 1
+                        tag.destroy
+                    end
                 end
             end
             
@@ -184,41 +186,38 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
     # PUT update one restaurant /api/v1/restaurants/:id
     def update
         if !(restaurant = @current_user.restaurants.find_by_id(params[:id])).nil?
-            
             #Check if params for tags are present
-            if restaurant_params[:tags].present?
-                
-                tags_params = restaurant_params[:tags]
-                
-                tags_params.each do |tag|
-                    #If tag already exists then just add a reference between that tag and restaurant
-                    if Tag.exists?(tag)
-                        restaurant.tags << Tag.find_by_name(tag["name"])
-                    else
-                        restaurant.tags << Tag.new(tag)
-                    end
-                end
-            end
+        #if restaurant_params[:tags].present?
+         #   tags_params = restaurant_params[:tags]
             
-            #Check if params for position are present
-            if restaurant_params[:position].present?
-                position = restaurant_params[:position]
-                
-                #If position already exists then just add a reference to it
-                if Position.exists?(position)
-                    this_position = Position.find_by_address(position["address"])
-                    restaurant.position_id = this_position.id
-                    restaurant.save
-                else
-                    #If position does not exists, create a new one
-                    new_position = Position.new(position)
-                    new_position.save
-                    restaurant.position_id = new_position.id
-                    restaurant.save
-                end
-            end
+         #   tags_params.each do |tag|
+                #If tag already exists then just add a reference between that tag and restaurant
+         #       if Tag.exists?(tag)
+         #           restaurant.tags << Tag.find_by_name(tag["name"])
+         #       else
+         #           restaurant.tags << Tag.new(tag)
+         #       end
+         #   end
+        #end
+        
+        #Check if params for position are present
+        #if restaurant_params[:position].present?
+        #    position = restaurant_params[:position]
             
-            if restaurant.update(restaurant_params)
+            #If position already exists then just add a reference to it
+        #    if Position.exists?(position)
+        #        this_position = Position.find_by_address(position["address"])
+        #        restaurant.position_id = this_position.id
+        #        restaurant.save
+        #    else
+        #        #If position does not exists, create a new one
+        #        new_position = Position.new(position)
+        #        new_position.save
+        #        restaurant.position_id = new_position.id
+        #        restaurant.save
+        #    end
+        #end
+            if restaurant.update(restaurant_params.except(:tags, :locations))
                render json: restaurant, status: :created
             else
                 respond_with restaurant.errors, status: :unprocessable_entity
