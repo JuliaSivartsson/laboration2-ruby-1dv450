@@ -220,7 +220,7 @@ class Api::V1::RestaurantsController < Api::V1::ApiController
             if restaurant.update(restaurant_params.except(:tags, :locations))
                render json: restaurant, status: :created
             else
-                respond_with restaurant.errors, status: :unprocessable_entity
+                render json: restaurant.errors , status: :bad_request
             end
         else
             render json: { error: "No restaurant with this id was found" }, status: :not_found
